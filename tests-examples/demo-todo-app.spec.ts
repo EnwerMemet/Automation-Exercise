@@ -11,7 +11,7 @@ const TODO_ITEMS = [
 ] as const;
 
 test.describe('New Todo', () => {
-  test('should allow me to add todo items', async ({ page }) => {
+  test('@test - should allow me to add todo items', async ({ page }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
@@ -22,6 +22,31 @@ test.describe('New Todo', () => {
     // Make sure the list only has one todo item.
     await expect(page.getByTestId('todo-title')).toHaveText([
       TODO_ITEMS[0]
+    ]);
+
+    // Create 2nd todo.
+    await newTodo.fill(TODO_ITEMS[1]);
+    await newTodo.press('Enter');
+
+    // Make sure the list now has two todo items.
+    await expect(page.getByTestId('todo-title')).toHaveText([
+      TODO_ITEMS[0],
+      TODO_ITEMS[1]
+    ]);
+
+    await checkNumberOfTodosInLocalStorage(page, 2);
+  });
+  test.only('@smoke - should allow me to add todo items', async ({ page }) => {
+    // create a new todo locator
+    const newTodo = page.getByPlaceholder('What needs to be done?');
+
+    // Create 1st todo.
+    await newTodo.fill(TODO_ITEMS[0]);
+    await newTodo.press('Enter');
+
+    // Make sure the list only has one todo item.
+    await expect(page.getByTestId('todo-title')).toHaveText([
+      TODO_ITEMS[1]
     ]);
 
     // Create 2nd todo.
@@ -79,7 +104,7 @@ test.describe('Mark all as completed', () => {
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
 
-  test('should allow me to mark all items as completed', async ({ page }) => {
+  test('@smoke - should allow me to mark all items as completed', async ({ page }) => {
     // Complete all todos.
     await page.getByLabel('Mark all as complete').check();
 
@@ -121,7 +146,7 @@ test.describe('Mark all as completed', () => {
 
 test.describe('Item', () => {
 
-  test('should allow me to mark items as complete', async ({ page }) => {
+  test('@smoke - should allow me to mark items as complete', async ({ page }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
@@ -197,7 +222,7 @@ test.describe('Editing', () => {
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
 
-  test('should hide other controls when editing', async ({ page }) => {
+  test('@smoke - should hide other controls when editing', async ({ page }) => {
     const todoItem = page.getByTestId('todo-item').nth(1);
     await todoItem.dblclick();
     await expect(todoItem.getByRole('checkbox')).not.toBeVisible();
@@ -282,7 +307,7 @@ test.describe('Clear completed button', () => {
     await createDefaultTodos(page);
   });
 
-  test('should display the correct text', async ({ page }) => {
+  test('@smoke - should display the correct text', async ({ page }) => {
     await page.locator('.todo-list li .toggle').first().check();
     await expect(page.getByRole('button', { name: 'Clear completed' })).toBeVisible();
   });
@@ -339,7 +364,7 @@ test.describe('Routing', () => {
     await checkTodosInLocalStorage(page, TODO_ITEMS[0]);
   });
 
-  test('should allow me to display active items', async ({ page }) => {
+  test('@smoke - should allow me to display active items', async ({ page }) => {
     const todoItem = page.getByTestId('todo-item');
     await page.getByTestId('todo-item').nth(1).getByRole('checkbox').check();
 

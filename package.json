@@ -4,14 +4,19 @@
   "description": "PlayWright Test automation for:    https://automationexercise.com/",
   "main": "index.js",
   "scripts": {
-    "test:e2e": "npx playwright test tests",
     "test": "npx playwright test",
     "test:headed": "npx playwright test --headed",
     "test:ui": "npx playwright test --ui",
     "test:debug": "npx playwright test --debug",
     "test:chrome": "npx playwright test --project=chromium --headed",
     "test:failed":"npx playwright test --last-failed",
-    "test:report": "npx playwright show-report"
+    "test:report": "npx playwright show-report",
+    "test:e2e": "npx playwright test tests",
+    "test:e2e:all": "npx playwright test tests --project=all-browsers-and-tests",
+    "test:e2e:test": "npx playwright test tests-examples/ --grep @test --project=chromium",
+    "test:e2e:smoke": "npx playwright test tests-examples/ --grep @smoke --project=chromium",
+    "test:e2e:non-smoke": "npx playwright test tests-examples/ --grep-invert @smoke --project=firefox",
+    "test:title": "npx playwright test -g"
   },
   "repository": {
     "type": "git",
