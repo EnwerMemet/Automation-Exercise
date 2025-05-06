@@ -1,0 +1,111 @@
+# Playwright Locators
+
+Playwright provides a powerful way to interact with web elements using locators.
+ Locators are used to find elements on a page and perform actions such as clicking, typing, and asserting.
+
+ npx Playwright test                                                                       runs all tests on all browsers in headless mode 
+ npx Playwright test  MyTest.spec.js                                                       runs a specific test file
+ npx Playwright test  MyTest.spec.js  --project=chromiun                                   runs a specific test file on chromiun browser only
+ npx Playwright test  MyTest.spec.js  --project=chromiun  --headed                         runs a specific test file on chromiun browser only on vidual mode
+ npx Playwright test  MyTest.spec.js  --project=chromiun  --headed  --debug                runs a specific test file on chromiun browser only on vidual mode with debug modal
+ 
+
+## Basic Locators
+CSS
+xpath 
+Property
+
+/*
+Locate single element 
+await page.click('locator');
+await page.locator('locator').click();
+await page.locator('locator', '{ hasText: 'value' }').click();
+
+inputbox 
+await page.fill('locator', 'value');
+await page.type('locator', 'value');
+await page.locator('locator').fill('value');    
+await page.locator('locator').type('value');
+
+Locate multiple elements
+const elements = await page.$$('locator');
+*/
+
+### Selecting by CSS Selector
+
+# Selecting by CSS Selector
+await page.click('button.submit');
+await page.click('.submit-button');
+
+# Selecting by Text
+await page.click('text="Submit"');
+
+# Selecting by XPath
+await page.click('//button[@class="submit"]');
+
+# Selecting by Role
+await page.click('role=button[name="Submit"]');
+
+# Selecting by id
+await page.click('#submit-button');
+
+# Selecting by Attribute
+await page.click('[data-test-id="submit-button"]');
+
+# Selecting by nth Element
+await page.click('button:nth-of-type(2)');
+
+
+
+
+
+# Locating multiple elements by CSS Selector and storing in a variable
+const buttons = await page.$$('button.submit');
+
+# Locating multiple elements by Text and storing in a variable
+const submitButtons = await page.$$('text="Submit"');
+
+# Locating multiple elements by XPath and storing in a variable
+const xpathButtons = await page.$$('//button[@class="submit"]');
+
+# Locating multiple elements by Role and storing in a variable
+const roleButtons = await page.$$('role=button[name="Submit"]');
+
+# Locating multiple elements by ID and storing in a variable
+const idButtons = await page.$$('#submit-button');
+
+# Locating multiple elements by Class and storing in a variable
+const classButtons = await page.$$('.submit-button');
+
+# Locating multiple elements by Attribute and storing in a variable
+const attributeButtons = await page.$$('[data-test-id="submit-button"]');
+
+# Locating multiple elements by nth Element and storing in a variable
+const nthButtons = await page.$$('button:nth-of-type(2)');
+
+
+/**
+Quick Guide
+These are the recommended built-in locators.
+
+page.getByRole() to locate by explicit and implicit accessibility attributes.
+page.getByText() to locate by text content.
+page.getByLabel() to locate a form control by associated label's text.
+page.getByPlaceholder() to locate an input by placeholder.
+page.getByAltText() to locate an element, usually image, by its text alternative.
+page.getByTitle() to locate an element by its title attribute.
+page.getByTestId() to locate an element based on its data-testid attribute (other attributes can be configured).
+
+
+await page.getByLabel('User Name').fill('John');
+
+await page.getByLabel('Password').fill('secret-password');
+
+await page.getByRole('button', { name: 'Sign in' }).click();
+
+await expect(page.getByText('Welcome, John!')).toBeVisible();
+
+ */
+
+
+

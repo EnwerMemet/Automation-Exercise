@@ -1,0 +1,31 @@
+{
+  "name": "automation-exercise",
+  "version": "1.0.0",
+  "description": "PlayWright Test automation for:    https://automationexercise.com/",
+  "main": "index.js",
+  "scripts": {
+    "test:e2e": "npx playwright test tests",
+    "test": "npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright test --debug",
+    "test:chrome": "npx playwright test --project=chromium --headed",
+    "test:failed":"npx playwright test --last-failed",
+    "test:report": "npx playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnwerMemet/Automation-Exercise.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EnwerMemet/Automation-Exercise/issues"
+  },
+  "homepage": "https://github.com/EnwerMemet/Automation-Exercise#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.12"
+  }
+}
