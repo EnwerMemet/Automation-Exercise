@@ -36,7 +36,7 @@ test.describe('New Todo', () => {
 
     await checkNumberOfTodosInLocalStorage(page, 2);
   });
-  test.only('@smoke - should allow me to add todo items', async ({ page }) => {
+  test('@smoke - should allow me to add todo items', async ({ page }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
